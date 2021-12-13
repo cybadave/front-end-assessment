@@ -1,5 +1,18 @@
 # Parking Charge Calculator
 
+## Documentation
+
+I have 1 test case failing: 'Non Leap year calculated correctly'
+
+Good old off-by-one errors. I would hazard a guess that the problem lies here:
+```TypeScript
+const full_days = getWeekDaysBetweenDates(start, end) - 1;
+```
+
+I probably don't always want to decrement this, and should find a better way of counting between dates exclusively.
+
+exercise time boxed to 3 hours.
+
 ## The Challenge
 You run a car park that, at the moment, has two charging options - Short Stay and Long Stay. Visitors choose which option they want to use when they enter the car park and the charge is calculated when they leave based on the length of their visit.
 
