@@ -13,11 +13,11 @@ const getDaysBetweenDates = (start: Date, end: Date) => {
     return Math.round((to.getTime() - from.getTime()) / MS_PER_DAY);
 }
 
-const getWeekDaysBetweenDates = (d0: Date, d1: Date) => {
-    const days = getDaysBetweenDates(d0, d1);
+const getWeekDaysBetweenDates = (start: Date, end: Date) => {
+    const days = getDaysBetweenDates(start, end);
     const minimumWeekendCount = Math.floor(days / DAYS_IN_WEEK) * WEEKEND_DAYS_IN_WEEK;
     const daysToCheck = days % 7;
-    return days - minimumWeekendCount - countWeekendDaysInNDaysFromDate(d0, daysToCheck);
+    return days - minimumWeekendCount - countWeekendDaysInNDaysFromDate(start, daysToCheck);
 }
 
 const isWeekend = (date: Date) =>
@@ -28,12 +28,11 @@ const areDatesTheSameDay = (from: Date, to: Date): boolean => {
 }
 
 const countWeekendDaysInNDaysFromDate = (start: Date, days: number): number => {
-    const msPerDay = 8.64e7;
     let from = new Date(start);
     let count = 0;
     for (let i = 0; i < days; i++) {
         if (isWeekend(from)) count++;
-        from = new Date(from.getTime() + msPerDay);
+        from = new Date(from.getTime() + MS_PER_DAY);
     }
     return count
 }
